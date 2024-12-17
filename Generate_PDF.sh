@@ -29,12 +29,11 @@ log_message "Raw NAUTILUS_SCRIPT_SELECTED_FILE_PATHS:"
 log_message "$NAUTILUS_SCRIPT_SELECTED_FILE_PATHS"
 
 # Create an array to store valid image files
-mapfile -d $'\0' -t all_files <<< "$NAUTILUS_SCRIPT_SELECTED_FILE_PATHS"
-declare -a valid_files
+mapfile -t all_files <<< "$NAUTILUS_SCRIPT_SELECTED_FILE_PATHS"
 
-log_message "All files after mapfile:"
+log_message "All files after parsing:"
 for file in "${all_files[@]}"; do
-    log_message "  $file"
+    log_message " - File: $file"
 done
 
 # Process each selected file
@@ -43,7 +42,7 @@ for file in "${all_files[@]}"; do
         valid_files+=("$file")
         log_message "Added valid file: $file"
     else
-        log_message "Skipped invalid file: $file"
+        log_message "Skipped invalid file: $file and extension: ${file##*.}"
     fi
 done
 
