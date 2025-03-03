@@ -5,9 +5,9 @@
 # Make it executable with: chmod +x ~/.local/share/nautilus/scripts/Images_to_PDF.sh
 
 # Function to log messages
+rm /tmp/nautilus_pdf_debug.log;
 log_message() {
-    # Uncomment to log
-    # echo "$1" >> /tmp/nautilus_pdf_debug.log
+    echo "$1" >> /tmp/nautilus_pdf_debug.log
 }
 
 log_message "----------------------------------------"
@@ -72,7 +72,7 @@ convert_command="convert"
 for file in "${valid_files[@]}"; do
     convert_command+=" \"$file\""
 done
-convert_command+=" -quality 100 \"$output_pdf\""
+convert_command+=" -quality 100 \"$output_pdf.pdf\""
 
 log_message "Convert command: $convert_command"
 
